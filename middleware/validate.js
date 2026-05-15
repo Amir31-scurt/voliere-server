@@ -32,17 +32,17 @@ export const schemas = {
 
   pigeon: Joi.object({
     bague:           Joi.string().min(3).max(50).required(),
-    nom:             Joi.string().max(100).optional().allow(''),
+    nom:             Joi.string().max(100).optional().allow('', null),
     sexe:            Joi.string().valid('male', 'femelle').required(),
-    race:            Joi.string().max(100).optional().allow(''),
+    race:            Joi.string().max(100).optional().allow('', null),
     date_naissance:  Joi.date().iso().optional().allow(null),
-    couleur:         Joi.string().max(50).optional().allow(''),
+    couleur:         Joi.string().max(50).optional().allow('', null),
     origine:         Joi.string().valid('né ici', 'acheté', 'importé').optional(),
     pere_id:         Joi.string().uuid().optional().allow(null),
     mere_id:         Joi.string().uuid().optional().allow(null),
     cage_actuelle_id:Joi.string().uuid().optional().allow(null),
     photo_url:       Joi.string().uri().optional().allow(null, ''),
-    notes:           Joi.string().max(1000).optional().allow(''),
+    notes:           Joi.string().max(1000).optional().allow('', null),
   }),
 
   couple: Joi.object({
@@ -50,7 +50,7 @@ export const schemas = {
     femelle_id:     Joi.string().uuid().required(),
     date_formation: Joi.date().iso().required(),
     cage_id:        Joi.string().uuid().optional().allow(null),
-    notes:          Joi.string().max(1000).optional().allow(''),
+    notes:          Joi.string().max(1000).optional().allow('', null),
   }),
 
   affecterCage: Joi.object({
@@ -79,6 +79,6 @@ export const schemas = {
     acheteur:       Joi.string().max(150).optional().allow('', null),
     cause_probable: Joi.string().max(255).optional().allow('', null),
     circonstance:   Joi.string().max(255).optional().allow('', null),
-    notes:          Joi.string().max(1000).optional().allow(''),
+    notes:          Joi.string().max(1000).optional().allow('', null),
   }),
 };

@@ -77,10 +77,6 @@ export const updateReproduction = asyncHandler(async (req, res) => {
   const { statut, nombre_nes, bagues_pigeonneaux, noms_pigeonneaux, sexes_pigeonneaux } = req.body;
   const nbNes = Number(nombre_nes) || 0;
 
-  // DEBUG — remove after fix
-  console.log('[DEBUG] req.body reçu:', JSON.stringify(req.body, null, 2));
-  console.log('[DEBUG] sexes_pigeonneaux:', sexes_pigeonneaux);
-
   const { data: existing } = await supabase
     .from('reproductions').select('*').eq('id', id).single();
   
