@@ -77,6 +77,10 @@ export const updateReproduction = asyncHandler(async (req, res) => {
   const { statut, nombre_nes, bagues_pigeonneaux, noms_pigeonneaux, sexes_pigeonneaux } = req.body;
   const nbNes = Number(nombre_nes) || 0;
 
+  // DEBUG — remove after fix
+  console.log('[DEBUG] req.body reçu:', JSON.stringify(req.body, null, 2));
+  console.log('[DEBUG] sexes_pigeonneaux:', sexes_pigeonneaux);
+
   const { data: existing } = await supabase
     .from('reproductions').select('*').eq('id', id).single();
   
@@ -136,13 +140,16 @@ export const updateReproduction = asyncHandler(async (req, res) => {
             ? bagueFournie
             : `PIJ-${id.slice(0, 5).toUpperCase()}-${String(i + 1).padStart(2, '0')}`;
 
+          const sexe = sexes_pigeonneaux?.[i];
+          const sexeValide = ['male', 'femelle', 'inconnu'].includes(sexe) ? sexe : 'inconnu';
+
           return {
             bague,
             nom:     noms_pigeonneaux?.[i]?.trim()  || `Pigeonneau ${i + 1}`,
-            sexe:    sexes_pigeonneaux?.[i]          || 'inconnu',
+            sexe:    sexeValide,
             race:    raceEnfant,
             statut:  'actif',
-            origine: 'Élevage',
+            origine: 'né ici',
             pere_id: couple.male_id,
             mere_id: couple.femelle_id,
             cage_actuelle_id: null,

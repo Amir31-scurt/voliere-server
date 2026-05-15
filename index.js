@@ -25,7 +25,7 @@ const server = http.createServer(app);
 // ── Socket.IO ────────────────────────────────────────────────
 const io = new Server(server, {
   cors: {
-    origin: process.env.CLIENT_URL || 'http://localhost:5173',
+    origin: process.env.CLIENT_URL ? process.env.CLIENT_URL.split(',') : ['http://localhost:3000', 'http://localhost:5173'],
     methods: ['GET', 'POST'],
   },
 });
@@ -36,7 +36,7 @@ initCageSocket(io);
 app.use(helmet()); // Headers HTTP sécurisés
 
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  origin: process.env.CLIENT_URL ? process.env.CLIENT_URL.split(',') : ['http://localhost:3000', 'http://localhost:5173'],
   credentials: true,
 }));
 

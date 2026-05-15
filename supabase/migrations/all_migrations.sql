@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS pigeons (
   race             VARCHAR(100),
   date_naissance   DATE,
   couleur          VARCHAR(50),
-  origine          VARCHAR(50) CHECK (origine IN ('né ici','acheté','importé')),
+  origine          VARCHAR(50) CHECK (origine IN ('né ici','acheté','importé')), -- pigeonneaux nés ici → 'né ici'
   pere_id          UUID REFERENCES pigeons(id),
   mere_id          UUID REFERENCES pigeons(id),
   couple_actif_id  UUID,
