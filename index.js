@@ -18,14 +18,19 @@ import cageRoutes         from './routes/cageRoutes.js';
 import reproductionRoutes from './routes/reproductionRoutes.js';
 import sortieRoutes       from './routes/sortieRoutes.js';
 
-// ── App & Server ─────────────────────────────────────────────
+// ── Serveur & Configuration CORS ─────────────────────────────
 const app    = express();
 const server = http.createServer(app);
+
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://voliere-app.vercel.app'
+];
 
 // ── Socket.IO ────────────────────────────────────────────────
 const io = new Server(server, {
   cors: {
-    origin: true,
+    origin: allowedOrigins,
     methods: ['GET', 'POST'],
     credentials: true,
   },
@@ -37,7 +42,7 @@ initCageSocket(io);
 app.use(helmet()); // Headers HTTP sécurisés
 
 app.use(cors({
-  origin: true,
+  origin: allowedOrigins,
   credentials: true,
 }));
 
