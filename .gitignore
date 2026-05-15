@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# Environment variables (sensitive — never commit!)
+.env
+.env.local
+.env.production
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Build output
+dist/
+build/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Test files
+coverage/
+
+# Supabase local (if using supabase CLI)
+.supabase/
