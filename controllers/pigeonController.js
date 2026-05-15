@@ -9,7 +9,7 @@ export const getPigeons = asyncHandler(async (req, res) => {
 
   let query = supabase
     .from('pigeons')
-    .select('*, pere:pigeons!pere_id(id,bague,nom), mere:pigeons!mere_id(id,bague,nom)', { count: 'exact' })
+    .select('*, pere:pere_id(id,bague,nom), mere:mere_id(id,bague,nom)', { count: 'exact' })
     .eq('is_deleted', false)
     .order('created_at', { ascending: false })
     .range(offset, offset + Number(limit) - 1);
@@ -30,8 +30,8 @@ export const getPigeonById = asyncHandler(async (req, res) => {
     .from('pigeons')
     .select(`
       *,
-      pere:pigeons!pere_id(id, bague, nom, race, sexe),
-      mere:pigeons!mere_id(id, bague, nom, race, sexe),
+      pere:pere_id(id, bague, nom, race, sexe),
+      mere:mere_id(id, bague, nom, race, sexe),
       cage:cages!cage_actuelle_id(id, numero, voliere)
     `)
     .eq('id', req.params.id)

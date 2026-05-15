@@ -67,6 +67,8 @@ export const schemas = {
     notes:         Joi.string().max(1000).optional().allow(null, ''),
     statut:        Joi.string().valid('en_cours', 'terminee', 'echouee').optional(),
     bagues_pigeonneaux: Joi.array().items(Joi.string().allow('', null)).optional(),
+    noms_pigeonneaux:   Joi.array().items(Joi.string().allow('', null)).optional(),
+    sexes_pigeonneaux:  Joi.array().items(Joi.string().valid('male', 'femelle', 'inconnu').allow('', null)).optional(),
   }),
 
   sortie: Joi.object({
