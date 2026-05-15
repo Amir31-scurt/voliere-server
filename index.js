@@ -1,7 +1,6 @@
 import 'dotenv/config';
 import express from 'express';
 import http from 'http';
-import { Server } from 'socket.io';
 import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
@@ -9,7 +8,6 @@ import swaggerUi from 'swagger-ui-express';
 
 import { swaggerSpec } from './docs/swagger.js';
 import { errorHandler } from './middleware/errorHandler.js';
-import { initCageSocket } from './socket/cageSocket.js';
 
 import authRoutes         from './routes/authRoutes.js';
 import pigeonRoutes       from './routes/pigeonRoutes.js';
@@ -27,16 +25,7 @@ const allowedOrigins = [
   'https://voliere-app.vercel.app'
 ];
 
-// ── Socket.IO ────────────────────────────────────────────────
-const io = new Server(server, {
-  cors: {
-    origin: allowedOrigins,
-    methods: ['GET', 'POST'],
-    credentials: true,
-  },
-});
-app.set('io', io); // accessible via req.app.get('io') dans les controllers
-initCageSocket(io);
+
 
 // ── Sécurité globale ─────────────────────────────────────────
 app.use(helmet()); // Headers HTTP sécurisés
